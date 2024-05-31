@@ -7,6 +7,10 @@
 // handle update request
 
 const Event = require('../models/event')
+const Organizer = require('../models/organizer')
+const Participant = require('../models/participant')
+const Venue = require('../models/venue')
+
 const asyncHandler = require('express-async-handler')
 
 exports.getEventList = asyncHandler(async(req, res, next) => {
@@ -39,12 +43,45 @@ exports.getEventDetails = asyncHandler(async(req, res, next) => {
     })
 })
 
-exports.eventForm = asyncHandler(async(req, res, next) => {
-    res.send('not implemented yet: event form')
+exports.getEventForm = asyncHandler(async(req, res, next) => {
+    const allOrganizers = await Organizer.find().sort({name: 1}).exec()
+    const allParticipants = await Participant.find().sort({name: 1}).exec()
+    const allVenues = await Venue.find().sort({name: 1}).exec()
+
+    res.render('eventForm', {
+        title: 'Create Event Form',
+        organizers: allOrganizers,
+        participants: allParticipants,
+        venues: allVenues
+    })
 })
 
-exports.eventPost = asyncHandler(async(req, res, next) => {
-    res.send('not implemented yet: event post')
+exports.postEventForm = asyncHandler(async(req, res, next) => {
+    const venueObj = await Venue.findOne({ name: req.body.eventVenue }).exec()
+    const organizerObj = await Organizer.findOne({ name: req.body.eventOrganizer }).exec()
+    const participantArr = []
+    if (!Array.isArray(req.body.eventParticipants)) {
+        const p = await Participant.findOne({ name:req.body.eventParticipants }).exec()
+        participantArr.push(p)
+    } else {
+        for (let i = 0; i < req.body.eventParticipants.length; i++) {
+            const p = await Participant.findOne({ name: req.body.eventParticipants[i] }).exec()
+            participantArr.push(p)
+        }
+    }
+
+    const event = new Event({
+        title: req.body.eventTitle,
+        description: req.body.eventDescription,
+        date: req.body.eventDate,
+        time: req.body.eventTime,
+        venue: venueObj,
+        organizer: organizerObj,
+        participants: participantArr
+    })
+    
+    await event.save()
+    res.redirect(event.url)
 })
 
 exports.eventDelete = asyncHandler(async(req, res, next) => {
