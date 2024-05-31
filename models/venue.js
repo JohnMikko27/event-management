@@ -9,7 +9,7 @@ const VenueSchema = new Schema({
 
 // Virtual for venue's URL
 VenueSchema.virtual('url').get(function () {
-    return `/catalog/venue/${this._id}`;
+    return `/venue/${this._id}`;
 })
 
 //  Export model

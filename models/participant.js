@@ -9,7 +9,7 @@ const ParticipantSchema = new Schema({
 
 //  Virtual for organizer's url
 ParticipantSchema.virtual('url').get(function () {
-    return `/catalog/participant/${this._id}`;
+    return `/participant/${this._id}`;
 })
 
 module.exports = mongoose.model("Participant", ParticipantSchema);

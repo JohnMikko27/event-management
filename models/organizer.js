@@ -9,7 +9,7 @@ const OrganizerSchema = new Schema({
 
 //  Virtual for organizer's url
 OrganizerSchema.virtual('url').get(function () {
-    return `/catalog/organizer/${this._id}`;
+    return `/organizer/${this._id}`;
 })
 
 module.exports = mongoose.model("Organizer", OrganizerSchema);

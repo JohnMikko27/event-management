@@ -13,7 +13,7 @@ const EventSchema = new Schema({
 
 // Virtual for event's URL
 EventSchema.virtual('url').get(function () {
-    return `/catalog/event/${this._id}`;
+    return `/event/${this._id}`;
 })
 
 // Export model
