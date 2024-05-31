@@ -18,8 +18,25 @@ exports.getEventList = asyncHandler(async(req, res, next) => {
     });
 })
 
-exports.eventDetail = asyncHandler(async(req, res, next) => {
-    res.send('not implemented yet: event detail')
+exports.getEventDetails = asyncHandler(async(req, res, next) => {
+    const eventDetails = await Event
+        .findById(req.params.id)
+        .populate('venue')
+        .populate('organizer')
+        .populate('participants')
+        .exec()
+    
+    // No results.
+    if (eventDetails === null) {
+        const err = new Error("Event not found");
+        err.status = 404;
+        return next(err);
+    }
+    console.log(eventDetails)
+    res.render('eventDetails', {
+        title: 'Event Details',
+        eventDetails: eventDetails
+    })
 })
 
 exports.eventForm = asyncHandler(async(req, res, next) => {

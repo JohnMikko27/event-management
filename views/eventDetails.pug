@@ -1,0 +1,22 @@
+extends layout 
+
+block content
+
+    h1= title
+
+    p #[strong Name:] #{eventDetails.title}
+    p #[strong Description:] #{eventDetails.description}
+    p #[strong Date:] #{eventDetails.date}
+    p #[strong Time:] #{eventDetails.time}
+    p #[strong Venue:] #{eventDetails.venue.name}
+    p #[strong Organizer:] #{eventDetails.organizer.name}
+    p #[strong Participants:] 
+        span 
+            each participant in eventDetails.participants 
+                p #{participant.name}
+
+
+
+
+
+    
