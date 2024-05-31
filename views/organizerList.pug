@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    h1= title 
+
+    if organizerList.length
+        ul 
+            each organizer in organizerList 
+                li 
+                    a(href=organizer.url) #{organizer.name}
+    else 
+        p There are no organizers

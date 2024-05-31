@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    h1= title 
+
+    if venueList.length
+        ul 
+            each venue in venueList 
+                li 
+                    a(href=venue.url) #{venue.name}
+    else 
+        p There are no venues

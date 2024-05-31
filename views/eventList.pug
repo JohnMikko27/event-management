@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+    h1= title 
+
+    if eventList.length
+        ul 
+            each event in eventList
+                li 
+                    a(href=event.url) #{event.title}
+                    
+    else
+        p There are no events

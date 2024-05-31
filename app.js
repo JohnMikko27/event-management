@@ -4,21 +4,25 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+var catalogRouter = require('./routes/catalog');
 
 var app = express();
-
+require('dotenv').config();
+const MONGODB_URI = process.env.MONGODB_URI
+// Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb+srv://realmiks27:UZBNzr2ZyFlsqL1d@cluster0.dkas7rx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const mongoDB = MONGODB_URI
 
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

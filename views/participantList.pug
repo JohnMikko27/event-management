@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    h1= title 
+
+    if participantList.length
+        ul 
+            each participant in participantList 
+                li 
+                    a(href=participant.url) #{participant.name}
+    else 
+        p There are no participants
