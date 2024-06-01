@@ -7,7 +7,7 @@ const participantController = require('../controllers/participantController')
 const venueController = require('../controllers/venueController')
 
 router.get('/', function(req, res, next) {
-    res.render('eventForm')
+    res.render('index')
 })
 
 // Events
@@ -15,9 +15,14 @@ router.get('/events', eventController.getEventList)
 
 router.get('/event/:id', eventController.getEventDetails)
 
+router.get('/event/:id/delete', eventController.getDeleteEvent)
+
+router.post('/event/:id/delete', eventController.postDeleteEvent)
+
 router.get('/eventForm', eventController.getEventForm)
 
 router.post('/eventForm', eventController.postEventForm)
+
 
 // Organizers
 router.get('/organizers', organizerController.getOrganizerList)
@@ -27,6 +32,7 @@ router.get('/organizer/:id', organizerController.getOrganizerDetails)
 router.get('/organizerForm', organizerController.getOrganizerForm)
 
 router.post('/organizerForm', organizerController.postOrganizerForm)
+
 
 // Participants
 router.get('/participants', participantController.getParticipantList)

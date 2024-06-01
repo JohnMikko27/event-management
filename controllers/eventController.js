@@ -84,9 +84,17 @@ exports.postEventForm = asyncHandler(async(req, res, next) => {
     res.redirect(event.url)
 })
 
-exports.eventDelete = asyncHandler(async(req, res, next) => {
-    res.send('not implemented yet: event delete')
+exports.getDeleteEvent = asyncHandler(async(req, res, next) => {
+    res.render('deleteForm', {
+        title: 'Delete event'
+    })
 })
+
+exports.postDeleteEvent = asyncHandler(async(req, res, next) => {
+    await Event.findByIdAndDelete(req.params.id)
+    res.redirect('/events')
+})
+
 
 exports.eventUpdateFormGet = asyncHandler(async(req, res, next) => {
     res.send('not implemented yet: event update form get')

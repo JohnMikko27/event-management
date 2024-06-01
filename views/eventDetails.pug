@@ -15,6 +15,9 @@ block content
             each participant in eventDetails.participants 
                 p #{participant.name}
 
+    button(type='submit') 
+        a(href=`/event/${eventDetails._id}/delete`) Delete event
+
 
 
 
