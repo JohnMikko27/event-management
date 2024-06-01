@@ -6,3 +6,6 @@ block content
     p #[strong Name:] #{participant.name}
     p #[strong Email:] #{participant.email}
     p #[strong Phone:] #{participant.phone}
+
+    button
+        a(href=`/participant/${participant._id}/delete`) Delete participant

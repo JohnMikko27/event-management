@@ -42,3 +42,12 @@ exports.postVenueForm = asyncHandler(async(req, res, next) => {
     await venue.save()
     res.redirect(venue.url)
 })
+
+exports.getDeleteVenue = asyncHandler(async(req, res, next) => {
+    res.render('deleteVenue', { title: 'Delete Venue'})
+})
+
+exports.postDeleteVenue = asyncHandler(async(req, res, next) => {
+    await Venue.findByIdAndDelete(req.params.id)
+    res.redirect('/venues')
+})

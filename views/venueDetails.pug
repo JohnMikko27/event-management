@@ -7,3 +7,6 @@ block content
     p #[strong Name:] #{venue.name}
     p #[strong Address:] #{venue.address}
     p #[strong Capacity:] #{venue.capacity}
+
+    button 
+        a(href=`/venue/${venue._id}/delete`) Delete venue

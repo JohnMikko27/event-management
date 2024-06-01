@@ -29,6 +29,10 @@ router.get('/organizers', organizerController.getOrganizerList)
 
 router.get('/organizer/:id', organizerController.getOrganizerDetails)
 
+router.get('/organizer/:id/delete', organizerController.getDeleteOrganizer)
+
+router.post('/organizer/:id/delete', organizerController.postDeleteOrganizer)
+
 router.get('/organizerForm', organizerController.getOrganizerForm)
 
 router.post('/organizerForm', organizerController.postOrganizerForm)
@@ -39,6 +43,10 @@ router.get('/participants', participantController.getParticipantList)
 
 router.get('/participant/:id', participantController.getParticipantDetails)
 
+router.get('/participant/:id/delete', participantController.getDeleteParticipant)
+
+router.post('/participant/:id/delete', participantController.postDeleteParticipant)
+
 router.get('/participantForm', participantController.getParticipantForm)
 
 router.post('/participantForm', participantController.postParticipantForm)
@@ -47,6 +55,10 @@ router.post('/participantForm', participantController.postParticipantForm)
 router.get('/venues', venueController.getVenueList)
 
 router.get('/venue/:id', venueController.getVenueDetails)
+
+router.get('/venue/:id/delete', venueController.getDeleteVenue)
+
+router.post('/venue/:id/delete', venueController.postDeleteVenue)
 
 router.get('/venueForm', venueController.getVenueForm)
 

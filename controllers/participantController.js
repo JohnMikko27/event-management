@@ -41,3 +41,13 @@ exports.postParticipantForm = asyncHandler(async(req, res, next) => {
     await participant.save()
     res.redirect(participant.url)
 })
+
+exports.getDeleteParticipant = asyncHandler(async(req, res, next) => {
+    res.render('deleteParticipant', { title: 'Delete participant' })
+})
+
+exports.postDeleteParticipant = asyncHandler(async(req, res, next) => {
+    await Participant.findByIdAndDelete(req.params.id)
+    res.redirect('/participants')
+})
+

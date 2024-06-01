@@ -44,3 +44,12 @@ exports.postOrganizerForm = asyncHandler(async(req, res, next) => {
     await organizer.save()
     res.redirect(organizer.url)
 })
+
+exports.getDeleteOrganizer = asyncHandler(async(req, res, next) => {
+    res.render('deleteOrganizer', {title: 'Delete organizer'})
+})
+
+exports.postDeleteOrganizer = asyncHandler(async(req, res, next) => {
+    await Organizer.findByIdAndDelete(req.params.id)
+    res.redirect('/organizers')
+})
