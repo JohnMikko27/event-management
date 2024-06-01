@@ -25,3 +25,22 @@ exports.getOrganizerDetails = asyncHandler(async(req, res, next) => {
         organizer: organizer,
     })
 })
+
+exports.getOrganizerForm = asyncHandler(async(req, res, next) => {
+    res.render('organizerForm', {
+        title: 'Organizer Form'
+    })
+})
+
+exports.postOrganizerForm = asyncHandler(async(req, res, next) => {
+    const organizer = new Organizer({
+        name: req.body.organizerName,
+        email: req.body.organizerEmail,
+        phone: parseInt(req.body.organizerPhone)
+    })
+    console.log(organizer)
+
+
+    await organizer.save()
+    res.redirect(organizer.url)
+})

@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+
+    h1= title 
+
+    form(method='POST')
+        div.form-group 
+            label(for='organizerName') Name: 
+            input#organizerName(type='text', placeholder='Name of organizer', name='organizerName', required)
+        div.form-group 
+            label(for='organizerEmail') Email: 
+            input#organizerEmail(type='email', placeholder='Email of organizer', name='organizerEmail', required)
+        div.form-group 
+            label(for='organizerPhone') Organizer:
+            input#organizerPhone(type='tel', placeholder='Phone of organizer', name='organizerPhone', required)
+
+        button#submitOrganizerForm(type='submit') Submit
+        //- get the post request working for the organizer form
+            

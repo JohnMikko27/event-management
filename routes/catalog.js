@@ -24,6 +24,10 @@ router.get('/organizers', organizerController.getOrganizerList)
 
 router.get('/organizer/:id', organizerController.getOrganizerDetails)
 
+router.get('/organizerForm', organizerController.getOrganizerForm)
+
+router.post('/organizerForm', organizerController.postOrganizerForm)
+
 // Participants
 router.get('/participants', participantController.getParticipantList)
 
