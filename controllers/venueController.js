@@ -25,3 +25,20 @@ exports.getVenueDetails = asyncHandler(async(req, res, next) => {
         venue: venue,
     })
 })
+
+exports.getVenueForm = asyncHandler(async(req, res, next) => {
+    res.render('venueForm', {
+        title: 'Venue Form'
+    })
+})
+
+exports.postVenueForm = asyncHandler(async(req, res, next) => {
+    const venue = new Venue( {
+        name: req.body.venueName,
+        address: req.body.venueAddress,
+        capacity: req.body.venueCapacity,
+    })
+    
+    await venue.save()
+    res.redirect(venue.url)
+})

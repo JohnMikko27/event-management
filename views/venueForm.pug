@@ -1,0 +1,19 @@
+extends layout 
+
+block content 
+    
+    h1= title 
+    //- name, address, capacity
+
+    form(method='POST')
+        div.form-group
+            label(for='venueName') Name
+            input(type='text', placeholder='Name of venue', name='venueName', required)
+        div.form-group
+            label(for='venueAddress') Address
+            input(type='text', placeholder='Address of venue', name='venueAddress', required)
+        div.form-group
+            label(for='venueCapacity') Capacity
+            input(type='number', placeholder='Capacity of venue', name='venueCapacity', required)
+        
+        button(type='submit') Submit

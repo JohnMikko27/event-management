@@ -33,9 +33,18 @@ router.get('/participants', participantController.getParticipantList)
 
 router.get('/participant/:id', participantController.getParticipantDetails)
 
+router.get('/participantForm', participantController.getParticipantForm)
+
+router.post('/participantForm', participantController.postParticipantForm)
+
 // Venues
 router.get('/venues', venueController.getVenueList)
 
 router.get('/venue/:id', venueController.getVenueDetails)
+
+router.get('/venueForm', venueController.getVenueForm)
+
+router.post('/venueForm', venueController.postVenueForm)
+
 
 module.exports = router

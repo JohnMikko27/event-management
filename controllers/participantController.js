@@ -25,3 +25,19 @@ exports.getParticipantDetails = asyncHandler(async(req, res, next) => {
         participant: participant,
     })
 })
+
+exports.getParticipantForm = asyncHandler(async(req, res, next) => {
+    res.render('participantForm', {
+        title: 'Participant Form'
+    })
+})
+
+exports.postParticipantForm = asyncHandler(async(req, res, next) => {
+    const participant = new Participant({
+        name: req.body.participantName,
+        email: req.body.participantEmail,
+        phone: parseInt(req.body.participantPhone)
+    })
+    await participant.save()
+    res.redirect(participant.url)
+})
