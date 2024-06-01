@@ -8,12 +8,12 @@ block content
     form(method='POST')
         div.form-group
             label(for='venueName') Name
-            input(type='text', placeholder='Name of venue', name='venueName', required)
+            input(type='text', placeholder='Name of venue', name='venueName', value=(undefined === venue ? '' : venue.name), required)
         div.form-group
             label(for='venueAddress') Address
-            input(type='text', placeholder='Address of venue', name='venueAddress', required)
+            input(type='text', placeholder='Address of venue', name='venueAddress', value=(undefined === venue ? '' : venue.address), required)
         div.form-group
             label(for='venueCapacity') Capacity
-            input(type='number', placeholder='Capacity of venue', name='venueCapacity', required)
+            input(type='number', placeholder='Capacity of venue', name='venueCapacity', value=(undefined === venue ? '' : venue.capacity), required)
         
         button(type='submit') Submit

@@ -51,3 +51,23 @@ exports.postDeleteParticipant = asyncHandler(async(req, res, next) => {
     res.redirect('/participants')
 })
 
+exports.getParticipantUpdateForm = asyncHandler(async(req, res, next) => {
+    const participant = await Participant.findById(req.params.id)
+    res.render('participantForm', { 
+        title: 'Participant form', 
+        participant: participant
+    })
+})
+
+exports.postParticipantUpdateForm = asyncHandler(async(req, res, next) => {
+    const participant = new Participant({
+        name: req.body.participantName,
+        email: req.body.participantEmail,
+        phone: parseInt(req.body.participantPhone),
+        _id: req.params.id
+    })
+
+    const updatedParticipant = await Participant.findByIdAndUpdate(req.params.id, participant, {})
+    res.redirect(updatedParticipant.url)
+})
+

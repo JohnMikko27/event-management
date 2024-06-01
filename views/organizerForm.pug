@@ -7,13 +7,13 @@ block content
     form(method='POST')
         div.form-group 
             label(for='organizerName') Name: 
-            input#organizerName(type='text', placeholder='Name of organizer', name='organizerName', required)
+            input#organizerName(type='text', placeholder='Name of organizer', name='organizerName', value=(undefined === organizer ? '' : organizer.name), required)
         div.form-group 
             label(for='organizerEmail') Email: 
-            input#organizerEmail(type='email', placeholder='Email of organizer', name='organizerEmail', required)
+            input#organizerEmail(type='email', placeholder='Email of organizer', name='organizerEmail', value=(undefined === organizer ? '' : organizer.email), required)
         div.form-group 
             label(for='organizerPhone') Organizer:
-            input#organizerPhone(type='tel', placeholder='Phone of organizer', name='organizerPhone', required)
+            input#organizerPhone(type='tel', placeholder='Phone of organizer', name='organizerPhone', value=(undefined === organizer ? '' : organizer.phone),required)
 
         button#submitOrganizerForm(type='submit') Submit
             

@@ -40,6 +40,10 @@ router.get('/organizerForm', organizerController.getOrganizerForm)
 
 router.post('/organizerForm', organizerController.postOrganizerForm)
 
+router.get('/organizer/:id/update', organizerController.getOrganizerUpdateForm)
+
+router.post('/organizer/:id/update', organizerController.postOrganizerUpdateForm)
+
 
 // Participants
 router.get('/participants', participantController.getParticipantList)
@@ -54,6 +58,11 @@ router.get('/participantForm', participantController.getParticipantForm)
 
 router.post('/participantForm', participantController.postParticipantForm)
 
+router.get('/participant/:id/update', participantController.getParticipantUpdateForm)
+
+router.post('/participant/:id/update', participantController.postParticipantUpdateForm)
+
+
 // Venues
 router.get('/venues', venueController.getVenueList)
 
@@ -66,6 +75,10 @@ router.post('/venue/:id/delete', venueController.postDeleteVenue)
 router.get('/venueForm', venueController.getVenueForm)
 
 router.post('/venueForm', venueController.postVenueForm)
+
+router.get('/venue/:id/update', venueController.getVenueUpdateForm)
+
+router.post('/venue/:id/update', venueController.postVenueUpdateForm)
 
 
 module.exports = router

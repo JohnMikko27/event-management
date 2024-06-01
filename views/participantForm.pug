@@ -7,12 +7,12 @@ block content
     form(method='POST')
         div.form-group 
             label(for='participantName') Name: 
-            input#participantName(type='text', placeholder='Name of participant', name='participantName', required)
+            input#participantName(type='text', placeholder='Name of participant', name='participantName', value=(undefined === participant ? '' : participant.name), required)
         div.form-group 
             label(for='participantEmail') Email: 
-            input#participantEmail(type='email', placeholder='Email of participant', name='participantEmail', required)
+            input#participantEmail(type='email', placeholder='Email of participant', name='participantEmail', value=(undefined === participant ? '' : participant.email), required)
         div.form-group 
             label(for='participantPhone') participant:
-            input#participantPhone(type='tel', placeholder='Phone of participant', name='participantPhone', required)
+            input#participantPhone(type='tel', placeholder='Phone of participant', name='participantPhone', value=(undefined === participant ? '' : participant.phone), required)
 
         button#submitparticipantForm(type='submit') Submit

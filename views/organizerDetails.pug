@@ -7,6 +7,9 @@ block content
     p #[strong Email:] #{organizer.email}
     p #[strong Phone:] #{organizer.phone}
 
-    button(type='submit') 
+    button 
         a(href=`/organizer/${organizer._id}/delete`) Delete organizer
+
+    button 
+        a(href=`/organizer/${organizer._id}/update`) Update organizer
 

@@ -51,3 +51,23 @@ exports.postDeleteVenue = asyncHandler(async(req, res, next) => {
     await Venue.findByIdAndDelete(req.params.id)
     res.redirect('/venues')
 })
+
+exports.getVenueUpdateForm = asyncHandler(async(req, res, next) => {
+    const venue = await Venue.findById(req.params.id)
+    res.render('venueForm', { 
+        title: 'Venue form',
+        venue: venue
+    })
+})
+
+exports.postVenueUpdateForm = asyncHandler(async(req, res, next) => {
+    const venue = new Venue({
+        name: req.body.venueName,
+        address: req.body.venueAdress,
+        capacity: req.body.venueCapacity,
+        _id: req.params.id
+    })
+
+    const updatedVenue = await Venue.findByIdAndUpdate(req.params.id, venue, {})
+    res.redirect(updatedVenue.url)
+})

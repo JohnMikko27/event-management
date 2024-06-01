@@ -38,8 +38,6 @@ exports.postOrganizerForm = asyncHandler(async(req, res, next) => {
         email: req.body.organizerEmail,
         phone: parseInt(req.body.organizerPhone)
     })
-    console.log(organizer)
-
 
     await organizer.save()
     res.redirect(organizer.url)
@@ -52,4 +50,25 @@ exports.getDeleteOrganizer = asyncHandler(async(req, res, next) => {
 exports.postDeleteOrganizer = asyncHandler(async(req, res, next) => {
     await Organizer.findByIdAndDelete(req.params.id)
     res.redirect('/organizers')
+})
+
+exports.getOrganizerUpdateForm = asyncHandler(async(req, res, next) => {
+    const organizer = await Organizer.findById(req.params.id)
+    console.log(organizer)
+    res.render('organizerForm', { 
+        title: 'Organizer form',
+        organizer: organizer
+    })
+})
+
+exports.postOrganizerUpdateForm = asyncHandler(async(req, res, next) => {
+    const organizer = new Organizer({
+        name: req.body.organizerName,
+        email: req.body.organizerEmail,
+        phone: parseInt(req.body.organizerPhone),
+        _id: req.params.id
+    })
+
+    const updatedOrganizer = await Organizer.findByIdAndUpdate(req.params.id, organizer, {})
+    res.redirect(updatedOrganizer.url)
 })

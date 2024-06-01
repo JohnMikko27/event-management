@@ -37,7 +37,6 @@ exports.getEventDetails = asyncHandler(async(req, res, next) => {
         err.status = 404;
         return next(err);
     }
-    console.log(eventDetails)
     res.render('eventDetails', {
         title: 'Event Details',
         eventDetails: eventDetails
