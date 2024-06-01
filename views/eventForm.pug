@@ -5,34 +5,44 @@ block content
     form(method='POST')
         div.form-group 
             label(for='eventTitle') Title: 
-            input#eventTitle(type='text', placeholder='Title of event', name='eventTitle', required)
+            input#eventTitle(type='text', placeholder='Title of event', name='eventTitle', value=(undefined === event ? '' : event.title), required)
         div.form-group 
             label(for='eventDescription') Description: 
-            input#eventDescription(type='text', placeholder='Description of event', name='eventDescription', required)
+            input#eventDescription(type='text', placeholder='Description of event', name='eventDescription', value=(undefined === event ? '' : event.description), required)
         div.form-group 
             label(for='eventDate') Date: 
-            input#eventDate(type='date', placeholder='Date of event', name='eventDate', required)
+            input#eventDate(type='date', placeholder='Date of event', name='eventDate', value=(undefined === event ? '' : JSON.stringify(event.date)).slice(1,11), required)
         div.form-group 
             label(for='eventTime') Time: 
-            input#eventTime(type='time', placeholder='Time of event', name='eventTime', required)
+            input#eventTime(type='time', placeholder='Time of event', name='eventTime', value=(undefined === event ? '' : JSON.stringify(event.time).slice(1,6)), required)
         div.form-group 
             label(for='eventVenue') Venue: 
             select(name='eventVenue', id='eventVenue')
                 option(value='') --Please select an venue--
                 for venue in venues
-                    option(value=venue.name) #{venue.name}
+                    if (venue.name === event.venue.name) 
+                        option(value=venue.name selected) #{venue.name}
+                    else  
+                        option(value=venue.name) #{venue.name}
         div.form-group     
             label(for='eventOrganizer') Organizer 
             select(name='eventOrganizer', id='eventOrganizer')
                 option(value='') --Please select an organizer--
                 for organizer in organizers
-                    option(value=organizer.name) #{organizer.name}
+                    if organizer.name === event.organizer.name 
+                        option(value=organizer.name selected) #{organizer.name}
+                    else
+                        option(value=organizer.name) #{organizer.name}
         div.form-group 
             label(for='eventParticipants') Participants
             div     
-                for participant in participants 
-                    input(type='checkbox', name='eventParticipants', value=participant.name, id=participant._id) 
-                    label(for=participant._id) #{participant.name}
+                for participant in participants
+                    if participant.checked
+                        input(type='checkbox', name='eventParticipants', value=participant.name, id=participant._id, checked) 
+                        label(for=participant._id) #{participant.name}
+                    else
+                        input(type='checkbox', name='eventParticipants', value=participant.name, id=participant._id) 
+                        label(for=participant._id) #{participant.name}
 
         button#submitEventForm(type='submit') Submit
     

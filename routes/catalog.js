@@ -23,6 +23,9 @@ router.get('/eventForm', eventController.getEventForm)
 
 router.post('/eventForm', eventController.postEventForm)
 
+router.get('/event/:id/update', eventController.getEventUpdateForm)
+
+router.post('/event/:id/update', eventController.postEventUpdateForm)
 
 // Organizers
 router.get('/organizers', organizerController.getOrganizerList)

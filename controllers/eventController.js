@@ -8,6 +8,7 @@
 
 const Event = require('../models/event')
 const Organizer = require('../models/organizer')
+const participant = require('../models/participant')
 const Participant = require('../models/participant')
 const Venue = require('../models/venue')
 
@@ -96,10 +97,56 @@ exports.postDeleteEvent = asyncHandler(async(req, res, next) => {
 })
 
 
-exports.eventUpdateFormGet = asyncHandler(async(req, res, next) => {
-    res.send('not implemented yet: event update form get')
+exports.getEventUpdateForm = asyncHandler(async(req, res, next) => {
+    const allOrganizers = await Organizer.find().sort({name: 1}).exec()
+    const allParticipants = await Participant.find().sort({name: 1}).exec()
+    const allVenues = await Venue.find().sort({name: 1}).exec()
+    const event = await Event.findById(req.params.id)
+    .populate('venue')
+    .populate('organizer')
+    .populate('participants')
+    .exec()
+
+    allParticipants.forEach((p) => {
+        event.participants.forEach((participant) => {
+            if (p.name === participant.name) p.checked = true
+        })
+    })
+
+    res.render('eventForm', {
+        title: 'Event form',
+        event: event,
+        organizers: allOrganizers,
+        participants: allParticipants,
+        venues: allVenues
+    })
 })
 
-exports.eventUpdateFormPost = asyncHandler(async(req, res, next) => {
-    res.send('not implemented yet: event update form post')
+exports.postEventUpdateForm = asyncHandler(async(req, res, next) => {
+    const venueObj = await Venue.findOne({ name: req.body.eventVenue }).exec()
+    const organizerObj = await Organizer.findOne({ name: req.body.eventOrganizer }).exec()
+    const participantArr = []
+    if (!Array.isArray(req.body.eventParticipants)) {
+        const p = await Participant.findOne({ name: req.body.eventParticipants }).exec()
+        participantArr.push(p)
+    } else {
+        for (let i = 0; i < req.body.eventParticipants.length; i++) {
+            const p = await Participant.findOne({ name: req.body.eventParticipants[i] }).exec()
+            participantArr.push(p)
+        }
+    }
+
+    const event = new Event({
+        title: req.body.eventTitle,
+        description: req.body.eventDescription,
+        date: req.body.eventDate,
+        time: req.body.eventTime,
+        venue: venueObj,
+        organizer: organizerObj,
+        participants: participantArr,
+        _id: req.params.id,
+    })
+
+    const updatedEvent = await Event.findByIdAndUpdate(req.params.id, event, {})
+    res.redirect(updatedEvent.url)
 })
