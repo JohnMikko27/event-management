@@ -1,6 +1,7 @@
 extends layout 
 
 block content 
+    h1= title
 
     form(method='POST')
         div.form-group 
@@ -20,27 +21,39 @@ block content
             select(name='eventVenue', id='eventVenue')
                 option(value='') --Please select an venue--
                 for venue in venues
-                    if (venue.name === event.venue.name) 
-                        option(value=venue.name selected) #{venue.name}
-                    else  
+                    if event !== undefined
+                        if (venue.name === event.venue.name) 
+                            option(value=venue.name selected) #{venue.name}
+                        else  
+                            option(value=venue.name) #{venue.name}
+                    else 
                         option(value=venue.name) #{venue.name}
+
         div.form-group     
             label(for='eventOrganizer') Organizer 
             select(name='eventOrganizer', id='eventOrganizer')
                 option(value='') --Please select an organizer--
                 for organizer in organizers
-                    if organizer.name === event.organizer.name 
-                        option(value=organizer.name selected) #{organizer.name}
+                    if event !== undefined
+                        if organizer.name === event.organizer.name 
+                            option(value=organizer.name selected) #{organizer.name}
+                        else
+                            option(value=organizer.name) #{organizer.name}
                     else
                         option(value=organizer.name) #{organizer.name}
+
         div.form-group 
             label(for='eventParticipants') Participants
             div     
                 for participant in participants
-                    if participant.checked
-                        input(type='checkbox', name='eventParticipants', value=participant.name, id=participant._id, checked) 
-                        label(for=participant._id) #{participant.name}
-                    else
+                    if event !== undefined
+                        if participant.checked 
+                            input(type='checkbox', name='eventParticipants', value=participant.name, id=participant._id, checked) 
+                            label(for=participant._id) #{participant.name}
+                        else
+                            input(type='checkbox', name='eventParticipants', value=participant.name, id=participant._id) 
+                            label(for=participant._id) #{participant.name}
+                    else 
                         input(type='checkbox', name='eventParticipants', value=participant.name, id=participant._id) 
                         label(for=participant._id) #{participant.name}
 

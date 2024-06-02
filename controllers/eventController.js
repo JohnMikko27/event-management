@@ -8,7 +8,6 @@
 
 const Event = require('../models/event')
 const Organizer = require('../models/organizer')
-const participant = require('../models/participant')
 const Participant = require('../models/participant')
 const Venue = require('../models/venue')
 
@@ -47,7 +46,7 @@ exports.getEventForm = asyncHandler(async(req, res, next) => {
     const allOrganizers = await Organizer.find().sort({name: 1}).exec()
     const allParticipants = await Participant.find().sort({name: 1}).exec()
     const allVenues = await Venue.find().sort({name: 1}).exec()
-
+    
     res.render('eventForm', {
         title: 'Create Event Form',
         organizers: allOrganizers,
