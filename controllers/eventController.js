@@ -10,7 +10,7 @@ const Event = require('../models/event')
 const Organizer = require('../models/organizer')
 const Participant = require('../models/participant')
 const Venue = require('../models/venue')
-
+const { body, validationResult } = require("express-validator");
 const asyncHandler = require('express-async-handler')
 
 exports.getEventList = asyncHandler(async(req, res, next) => {
@@ -68,6 +68,12 @@ exports.postEventForm = asyncHandler(async(req, res, next) => {
             participantArr.push(p)
         }
     }
+
+    body("eventTitle", "Title must not be empty").trim().isLength({ min: 1 }).escape()
+    body("eventDescription", "Description must not be empty").trim().isLength({ min: 1 }).escape()
+    body("eventDate", "Date must not be empty").trim().isLength({ min: 1 }).escape()
+    body("eventTitle", "Title must not be empty").trim().isLength({ min: 1 }).escape()
+
 
     const event = new Event({
         title: req.body.eventTitle,
